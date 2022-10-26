@@ -1,5 +1,30 @@
 {
   "resources":{
-  "includes":[]},
+  "includes":[
+    {
+      "pattern":"\\Qcom/amazonaws/internal/config/awssdk_config_default.json\\E"
+    }, 
+    {
+      "pattern":"\\Qcom/amazonaws/partitions/endpoints.json\\E"
+    }, 
+    {
+      "pattern":"\\Qcom/amazonaws/sdk/versionInfo.properties\\E"
+    }, 
+    {
+      "pattern":"\\Qcom/amazonaws/xray/handlers/DefaultOperationParameterWhitelist.json\\E"
+    }, 
+    {
+      "pattern":"\\Qcom/amazonaws/xray/sdk.properties\\E"
+    }, 
+    {
+      "pattern":"\\Qcom/amazonaws/xray/strategy/sampling/DefaultSamplingRules.json\\E"
+    }, 
+    {
+      "pattern":"\\Qmozilla/public-suffix-list.txt\\E"
+    }, 
+    {
+      "pattern":"\\Qorg/apache/http/client/version.properties\\E"
+    }
+  ]},
   "bundles":[]
 }

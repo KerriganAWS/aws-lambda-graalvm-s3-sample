@@ -1,6 +1,9 @@
 package com.aws.dispatcher;
 
+import com.amazonaws.services.lambda.runtime.ClientContext;
+import com.amazonaws.services.lambda.runtime.CognitoIdentity;
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.ApplicationLoadBalancerRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.ApplicationLoadBalancerResponseEvent;
@@ -8,6 +11,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -37,13 +41,18 @@ public class AwsCw1XMLDispatcher
       final var expiration = new Date();
       expiration.setTime(Instant.now().toEpochMilli() + (4320 * 60 * 1000));
 
-      final var preSignedUrl = s3.generatePresignedUrl(config.getBucket(), fileName, expiration);
+      final var preSignedUrl = s3.generatePresignedUrl(config.getBucket(),
+          fileName, expiration);
 
       final var data = "{\"dataUrl\":\"" + preSignedUrl + "\"}";
 
-      final var queryString = "?" + requestEvent.getQueryStringParameters().entrySet().stream()
-          .map(e -> String.format("%s=%s", e.getKey(), e.getValue())).collect(Collectors.joining("&"));
-      final var targetUrl = config.getTargetUrl() + (queryString.length() == 1 ? "" : queryString);
+      final var queryString = "?" +
+          requestEvent.getQueryStringParameters().entrySet().stream()
+              .map(e -> String.format("%s=%s", e.getKey(),
+                  e.getValue()))
+              .collect(Collectors.joining("&"));
+      final var targetUrl = config.getTargetUrl() + (queryString.length() == 1 ? ""
+          : queryString);
       logger.log("target: " + targetUrl + " ,about to send data " + data);
 
     } catch (final Exception e) {
@@ -75,5 +84,82 @@ public class AwsCw1XMLDispatcher
       this.targetUrl = System.getenv("TARGET_URL");
     }
 
+  }
+
+  public static void main(String[] args) {
+    AwsCw1XMLDispatcher dispatcher = new AwsCw1XMLDispatcher();
+    ApplicationLoadBalancerRequestEvent requestEvent = new ApplicationLoadBalancerRequestEvent();
+    requestEvent.setBody("");
+    Context context = new Context() {
+      @Override
+      public String getAwsRequestId() {
+        return "";
+      }
+
+      @Override
+      public String getLogGroupName() {
+        return "";
+      }
+
+      @Override
+      public String getLogStreamName() {
+        return "";
+      }
+
+      @Override
+      public String getFunctionName() {
+        return "";
+      }
+
+      @Override
+      public String getFunctionVersion() {
+        return "";
+      }
+
+      @Override
+      public String getInvokedFunctionArn() {
+        return "";
+      }
+
+      @Override
+      public CognitoIdentity getIdentity() {
+        return null;
+      }
+
+      @Override
+      public ClientContext getClientContext() {
+        return null;
+      }
+
+      @Override
+      public int getRemainingTimeInMillis() {
+        return 0;
+      }
+
+      @Override
+      public int getMemoryLimitInMB() {
+        return 0;
+      }
+
+      @Override
+      public LambdaLogger getLogger() {
+        return new LambdaLogger() {
+          public void log(String message) {
+            System.out.print(message);
+          }
+
+          public void log(byte[] message) {
+            try {
+              System.out.write(message);
+            } catch (IOException e) {
+              // NOTE: When actually running on AWS Lambda, an IOException would never happen
+              e.printStackTrace();
+            }
+          }
+        };
+      }
+
+    };
+    dispatcher.handleRequest(requestEvent, context);
   }
 }

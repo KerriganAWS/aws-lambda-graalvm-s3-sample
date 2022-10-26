@@ -10,4 +10,7 @@ docker build . -t graalvm-lambda-builder --progress=plain --no-cache
 #Extract the resulting native image
 docker run --rm --entrypoint cat graalvm-lambda-builder ./target/native > native
 
+chmod 775 native
+chmod 775 bootstrap
+
 zip lambda-native native bootstrap
