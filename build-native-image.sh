@@ -14,3 +14,7 @@ chmod 775 native
 chmod 775 bootstrap
 
 zip lambda-native native bootstrap
+
+aws s3 cp lambda-native.zip s3://lambda-upload-testing/artifacts/
+
+aws lambda update-function-code --function-name s3-put-http-testing-function --s3-bucket lambda-upload-testing --s3-key artifacts/lambda-native.zip
