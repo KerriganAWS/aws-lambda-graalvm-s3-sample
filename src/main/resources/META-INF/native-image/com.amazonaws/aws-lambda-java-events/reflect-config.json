@@ -54,6 +54,12 @@
     "allDeclaredConstructors": true
   },
   {
+    "name": "com.amazonaws.services.lambda.runtime.events.ApplicationLoadBalancerRequestEvent$Elb",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
     "name": "com.amazonaws.services.lambda.runtime.events.ApplicationLoadBalancerResponseEvent",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
