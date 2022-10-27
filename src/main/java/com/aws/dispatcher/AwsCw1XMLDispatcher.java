@@ -29,7 +29,6 @@ public class AwsCw1XMLDispatcher
     final var expiration = new Date();
     expiration.setTime(Instant.now().toEpochMilli() + (4320 * 60 * 1000));
     final var preSignedUrl = s3.generatePresignedUrl(config.getBucket(), fileName, expiration);
-    ObjectMetadata meta = s3.getObjectMetadata(config.getBucket(), "artifacts/lambda-native.zip");
     response.setStatusCode(200);
     response.setBody(preSignedUrl.toString());
     return response;
