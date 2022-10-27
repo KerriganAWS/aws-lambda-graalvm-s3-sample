@@ -3,12 +3,12 @@
 #Remove older versions
 rm -rf native
 rm -rf lambda-native.zip
-rm -rf ./target/aws-large-request-dispatcher-1.0.0-SNAPSHOT
+rm -rf aws-large-request-dispatcher-1.0.0-SNAPSHOT
 
 ./mvnw clean package
 native-image -jar ./target/aws-large-request-dispatcher-1.0.0-SNAPSHOT.jar --verbose --no-fallback --enable-url-protocols=http
 
-cp ./target/aws-large-request-dispatcher-1.0.0-SNAPSHOT ./native
+cp ./aws-large-request-dispatcher-1.0.0-SNAPSHOT ./native
 
 chmod 775 native
 chmod 775 bootstrap
