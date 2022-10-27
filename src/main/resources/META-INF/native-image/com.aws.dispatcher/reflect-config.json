@@ -1,14 +1,5 @@
 [
   {
-    "name": "com.aws.dispatcher.AwsCw1XMLDispatcherV2",
-    "allDeclaredConstructors": true,
-    "allPublicConstructors": true,
-    "allDeclaredMethods": true,
-    "allPublicMethods": true,
-    "allDeclaredClasses": true,
-    "allPublicClasses": true
-  },
-  {
     "name": "com.aws.dispatcher.AwsCw1XMLDispatcher",
     "allDeclaredConstructors": true,
     "allPublicConstructors": true,
