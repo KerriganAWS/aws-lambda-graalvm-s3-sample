@@ -15,9 +15,6 @@ import com.amazonaws.xray.AWSXRay;
 public class AwsCw1XMLDispatcher
     implements RequestHandler<ApplicationLoadBalancerRequestEvent, ApplicationLoadBalancerResponseEvent> {
 
-  final private AmazonS3 s3 = AmazonS3ClientBuilder.standard()
-      .withRequestHandlers(new TracingHandler(AWSXRay.getGlobalRecorder())).build();
-
   @Override
   public ApplicationLoadBalancerResponseEvent handleRequest(final ApplicationLoadBalancerRequestEvent requestEvent,
       final Context context) {
@@ -27,6 +24,8 @@ public class AwsCw1XMLDispatcher
     final var response = new ApplicationLoadBalancerResponseEvent();
     final var expiration = new Date();
     expiration.setTime(Instant.now().toEpochMilli() + (4320 * 60 * 1000));
+    final AmazonS3 s3 = AmazonS3ClientBuilder.standard()
+        .withRequestHandlers(new TracingHandler(AWSXRay.getGlobalRecorder())).build();
     final var preSignedUrl = s3.generatePresignedUrl(config.getBucket(), fileName, expiration);
     response.setStatusCode(200);
     response.setBody(preSignedUrl.toString());
