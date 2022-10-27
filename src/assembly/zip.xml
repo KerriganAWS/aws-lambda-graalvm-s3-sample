@@ -9,7 +9,7 @@
     <file>
       <source>${project.build.directory}${file.separator}native</source>
       <outputDirectory>${file.separator}</outputDirectory>
-      <destName>product-binary</destName>
+      <destName>native</destName>
       <fileMode>777</fileMode>
     </file>
     <file>
