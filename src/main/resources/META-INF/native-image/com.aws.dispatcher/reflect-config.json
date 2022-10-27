@@ -9,7 +9,7 @@
     "allPublicClasses": true
   },
   {
-    "name": "com.aws.dispatcher.AwsCw1XMLDispatcherV1",
+    "name": "com.aws.dispatcher.AwsCw1XMLDispatcher",
     "allDeclaredConstructors": true,
     "allPublicConstructors": true,
     "allDeclaredMethods": true,
