@@ -176,7 +176,7 @@
                   <goal>single</goal>
                 </goals>
                 <configuration>
-                  <finalName>function</finalName>
+                  <finalName>lambda-native</finalName>
                   <descriptors>
                     <descriptor>src/assembly/zip.xml</descriptor>
                   </descriptors>
