@@ -13,7 +13,7 @@
       <fileMode>777</fileMode>
     </file>
     <file>
-      <source>${project.build.directory}${file.separator}bootstrap</source>
+      <source>bootstrap</source>
       <outputDirectory>${file.separator}</outputDirectory>
       <destName>bootstrap</destName>
       <fileMode>777</fileMode>
