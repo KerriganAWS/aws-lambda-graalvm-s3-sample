@@ -86,80 +86,82 @@ public class AwsCw1XMLDispatcher
 
   }
 
-  public static void main(String[] args) {
-    AwsCw1XMLDispatcher dispatcher = new AwsCw1XMLDispatcher();
-    ApplicationLoadBalancerRequestEvent requestEvent = new ApplicationLoadBalancerRequestEvent();
-    requestEvent.setBody("");
-    Context context = new Context() {
-      @Override
-      public String getAwsRequestId() {
-        return "";
-      }
+  // public static void main(String[] args) {
+  // AwsCw1XMLDispatcher dispatcher = new AwsCw1XMLDispatcher();
+  // ApplicationLoadBalancerRequestEvent requestEvent = new
+  // ApplicationLoadBalancerRequestEvent();
+  // requestEvent.setBody("");
+  // Context context = new Context() {
+  // @Override
+  // public String getAwsRequestId() {
+  // return "";
+  // }
 
-      @Override
-      public String getLogGroupName() {
-        return "";
-      }
+  // @Override
+  // public String getLogGroupName() {
+  // return "";
+  // }
 
-      @Override
-      public String getLogStreamName() {
-        return "";
-      }
+  // @Override
+  // public String getLogStreamName() {
+  // return "";
+  // }
 
-      @Override
-      public String getFunctionName() {
-        return "";
-      }
+  // @Override
+  // public String getFunctionName() {
+  // return "";
+  // }
 
-      @Override
-      public String getFunctionVersion() {
-        return "";
-      }
+  // @Override
+  // public String getFunctionVersion() {
+  // return "";
+  // }
 
-      @Override
-      public String getInvokedFunctionArn() {
-        return "";
-      }
+  // @Override
+  // public String getInvokedFunctionArn() {
+  // return "";
+  // }
 
-      @Override
-      public CognitoIdentity getIdentity() {
-        return null;
-      }
+  // @Override
+  // public CognitoIdentity getIdentity() {
+  // return null;
+  // }
 
-      @Override
-      public ClientContext getClientContext() {
-        return null;
-      }
+  // @Override
+  // public ClientContext getClientContext() {
+  // return null;
+  // }
 
-      @Override
-      public int getRemainingTimeInMillis() {
-        return 0;
-      }
+  // @Override
+  // public int getRemainingTimeInMillis() {
+  // return 0;
+  // }
 
-      @Override
-      public int getMemoryLimitInMB() {
-        return 0;
-      }
+  // @Override
+  // public int getMemoryLimitInMB() {
+  // return 0;
+  // }
 
-      @Override
-      public LambdaLogger getLogger() {
-        return new LambdaLogger() {
-          public void log(String message) {
-            System.out.print(message);
-          }
+  // @Override
+  // public LambdaLogger getLogger() {
+  // return new LambdaLogger() {
+  // public void log(String message) {
+  // System.out.print(message);
+  // }
 
-          public void log(byte[] message) {
-            try {
-              System.out.write(message);
-            } catch (IOException e) {
-              // NOTE: When actually running on AWS Lambda, an IOException would never happen
-              e.printStackTrace();
-            }
-          }
-        };
-      }
+  // public void log(byte[] message) {
+  // try {
+  // System.out.write(message);
+  // } catch (IOException e) {
+  // // NOTE: When actually running on AWS Lambda, an IOException would never
+  // happen
+  // e.printStackTrace();
+  // }
+  // }
+  // };
+  // }
 
-    };
-    dispatcher.handleRequest(requestEvent, context);
-  }
+  // };
+  // dispatcher.handleRequest(requestEvent, context);
+  // }
 }
