@@ -53,66 +53,6 @@
 
   <profiles>
     <profile>
-      <id>native</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <argLine>-agentlib:native-image-agent=config-output-dir=META-INF/native-image</argLine>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-shade-plugin</artifactId>
-            <version>3.4.0</version>
-            <executions>
-              <execution>
-                <phase>package</phase>
-                <goals>
-                  <goal>shade</goal>
-                </goals>
-                <configuration>
-                  <transformers>
-                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                      <mainClass>com.amazonaws.services.lambda.runtime.api.client.AWSLambda</mainClass>
-                    </transformer>
-                  </transformers>
-                  <shadedArtifactAttached>true</shadedArtifactAttached>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.graalvm.buildtools</groupId>
-            <artifactId>native-maven-plugin</artifactId>
-            <version>0.9.14</version>
-            <extensions>true</extensions>
-            <executions>
-              <execution>
-                <id>build-native</id>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-                <phase>package</phase>
-              </execution>
-            </executions>
-            <configuration>
-              <skip>false</skip>
-              <imageName>native</imageName>
-              <buildArgs>
-                <buildArg>--no-fallback</buildArg>
-                <buildArg>--enable-url-protocols=http</buildArg>
-              </buildArgs>
-              <classpath>
-                <param>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</param>
-              </classpath>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
       <id>native-image</id>
       <build>
         <plugins>
